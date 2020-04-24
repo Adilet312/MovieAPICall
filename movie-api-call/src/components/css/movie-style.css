@@ -1,0 +1,29 @@
+body{
+  margin:0;
+}
+.container{
+  width:100%;
+  margin-left: 2.5%;
+
+}
+img{
+  width:19%;
+  height:50vh;
+  background-size: cover;
+  box-sizing: border-box;
+}
+.img-block{
+  display: inline;
+  text-align: center;
+  box-sizing:content-box;
+}
+.search-box i{
+  position: absolute;
+  width:20px;
+  font-size: 50px;
+  text-align: center;
+
+}
+.search-box{
+  margin-left: 40%;
+}
