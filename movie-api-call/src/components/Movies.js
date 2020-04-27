@@ -1,46 +1,51 @@
 import React from 'react';
 import "./css/movie-style.css";
-import FaCaretSquareORight from 'react-icons/lib/fa/caret-square-o-right';
+import "./css/footer.css";
+import Header from './Header';
+import Footer from './Footer';
 class Movies extends React.Component{
   constructor() {
     super();
     this.state = {
       movies: [],
-      title: '',
       error: '',
       page: 1
     }
   }
-  getTitle = (event) => {
-    this.setState({title:event.target.value});
-  }
+  // getTitle = (event) => {
+  //   this.setState({title:event.target.value});
+  // }
 
-  getData = () =>
+  getData = (list) =>
   {
-      const {title} = this.state;
-      let url=`http://www.omdbapi.com/?s=${title}&page=1&apikey=cb289192`
-      fetch(url)
-      .then(result => result.json())
-      .then((data) => this.setState({movies:data.Search}))
-      .catch(console.log)
+    this.setState({movies:list});
   }
 
   render()
   {
     console.log(this.state.movies)
-    let list = this.state.movies.map((element) => <div className='img-block'><i className = 'fas fa-play'></i><img  src={element.Poster}></img></div>)
+    let list = this.state.movies.map((element) => <div className = 'box'>
+                                                    <div className = 'box-header'><span>{element.Title}</span></div>
+                                                    <div className = 'box-body'><img  src={element.Poster}></img></div>
+                                                    <div className = 'box-footer'><p>
+                                                      In computing, gettext is an internationalization and localization system commonly used
+                                                      for writing multilingual programs on Unix-like computer operating systems. One of the main
+                                                      benefits of gettext is that it separates programming from translating.</p>
+                                                   </div>
+                                                  </div>)
 
     return(
+      <div>
+          <div className = 'header-box'>
+            <Header getData = {this.getData} />
+          </div>
           <div className='container'>
-            <div className='search-box'>
-              <input type='text' placeholder='search' onKeyUp={this.getTitle}/>
-              <button onClick={this.getData}>Search</button>
-
-           </div>
-
+            <div className = 'grid-container'>
              {list}
-
-        </div>)
+            </div>
+         </div>
+         <Footer/>
+     </div>)
   }
 }
 export default Movies;
